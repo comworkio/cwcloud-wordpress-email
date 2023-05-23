@@ -2,32 +2,32 @@
 /**
  * Plugin Name: CwCloud Email API plugin
  * Plugin URI:  https://doc.cloud.comwork.io
- * Description: Replaces WordPress SMTP with the custom email API.
+ * Description: Replaces WordPress SMTP with the CwCloud email API.
  * Version:     1.0.0
  * Author:      Idriss Neumann
  * Author URI:  https://www.comwork.io
  */
 
-function custom_email_plugin_settings() {
+function cwcloud_email_plugin_settings() {
     add_options_page(
-        'Custom Email Plugin Settings',
-        'Custom Email Plugin',
+        'CwCloud Email Plugin Settings',
+        'CwCloud Email Plugin',
         'manage_options',
-        'custom-email-plugin-settings',
-        'custom_email_plugin_settings_page'
+        'cwcloud-email-plugin-settings',
+        'cwcloud_email_plugin_settings_page'
     );
 }
 
-add_action('admin_menu', 'custom_email_plugin_settings');
+add_action('admin_menu', 'cwcloud_email_plugin_settings');
 
-function custom_email_plugin_settings_page() {
+function cwcloud_email_plugin_settings_page() {
     ?>
     <div class="wrap">
-        <h1>Custom Email Plugin Settings</h1>
+        <h1>CwCloud Email Plugin Settings</h1>
         <form method="post" action="options.php">
             <?php
-            settings_fields('custom-email-plugin-settings');
-            do_settings_sections('custom-email-plugin-settings');
+            settings_fields('cwcloud-email-plugin-settings');
+            do_settings_sections('cwcloud-email-plugin-settings');
             submit_button();
             ?>
         </form>
@@ -35,39 +35,39 @@ function custom_email_plugin_settings_page() {
     <?php
 }
 
-function custom_email_plugin_register_settings() {
+function cwcloud_email_plugin_register_settings() {
     add_settings_section(
-        'custom-email-plugin-section',
+        'cwcloud-email-plugin-section',
         'API Settings',
-        'custom_email_plugin_section_callback',
-        'custom-email-plugin-settings'
+        'cwcloud_email_plugin_section_callback',
+        'cwcloud-email-plugin-settings'
     );
 
     add_settings_field(
         'cwcloud-api-secret',
-        'Bearer Token',
-        'custom_email_plugin_bearer_token_callback',
-        'custom-email-plugin-settings',
-        'custom-email-plugin-section'
+        'Secret Key',
+        'cwcloud_email_plugin_secret_token_callback',
+        'cwcloud-email-plugin-settings',
+        'cwcloud-email-plugin-section'
     );
 
     register_setting(
-        'custom-email-plugin-settings',
+        'cwcloud-email-plugin-settings',
         'cwcloud-api-secret'
     );
 }
-add_action('admin_init', 'custom_email_plugin_register_settings');
+add_action('admin_init', 'cwcloud_email_plugin_register_settings');
 
-function custom_email_plugin_section_callback() {
+function cwcloud_email_plugin_section_callback() {
     echo 'Enter your API secret key below:';
 }
 
-function custom_email_plugin_bearer_token_callback() {
+function cwcloud_email_plugin_secret_token_callback() {
     $token = get_option('cwcloud-api-secret');
     echo '<input type="text" name="cwcloud-api-secret" value="' . esc_attr($token) . '" />';
 }
 
-function custom_email_send($phpmailer) {
+function cwcloud_email_send($phpmailer) {
     $api_endpoint = 'https://CWCLOUD_ENDPOINT_URL/v1/email';
 
     $data = array(
@@ -101,4 +101,4 @@ function custom_email_send($phpmailer) {
     $phpmailer->ClearReplyTos();
 }
 
-add_action('phpmailer_init', 'custom_email_send');
+add_action('phpmailer_init', 'cwcloud_email_send');
