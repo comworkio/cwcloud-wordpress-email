@@ -70,10 +70,14 @@ function cwcloud_email_plugin_secret_token_callback() {
 function cwcloud_email_send($phpmailer) {
     $api_endpoint = 'https://CWCLOUD_ENDPOINT_URL/v1/email';
 
+    $from_addr = $phpmailer->From;
+    $to_addr = $phpmailer->AddAddress ? $phpmailer->AddAddress : $from_addr;
+    $bcc_addr = $phpmailer->AddBCC ? $phpmailer->AddBCC : null;
+
     $data = array(
-        'from' => $phpmailer->From,
-        'to' => $phpmailer->AddAddress,
-        'bcc' => $phpmailer->AddBCC,
+        'from' => $from_addr,
+        'to' => $to_addr,
+        'bcc' => $bcc_addr,
         'subject' => $phpmailer->Subject,
         'content' => $phpmailer->Body
     );
