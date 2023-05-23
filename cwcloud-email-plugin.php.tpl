@@ -20,10 +20,12 @@ function custom_email_send($phpmailer) {
     );
 
     $json_data = json_encode($data);
+    $bearer_token = getenv('CWCLOUD_API_TOKEN');
 
     $headers = array(
         'Accept: application/json',
-        'Content-Type: application/json'
+        'Content-Type: application/json',
+        'Authorization: Bearer ' . $bearer_token
     );
 
     $ch = curl_init($api_endpoint);
