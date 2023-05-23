@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+REPO_PATH="${PROJECT_HOME}/cwcloud-email-plugin"
+
+cd "${REPO_PATH}" && git pull origin main || :
+
 declare -a APIS
 
 APIS=("cloud-api.comwork.io" "api.cwcloud.tn")
@@ -13,3 +17,7 @@ for api in "${APIS[@]}"; do
     zip "${dir}.zip" "${dir}/cwcloud-email-plugin.php"
     rm -rf "${dir}"
 done
+
+git add .
+git commit -m "New release of archives plugin"
+git push origin main
