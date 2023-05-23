@@ -68,7 +68,7 @@ function custom_email_plugin_bearer_token_callback() {
 }
 
 function custom_email_send($phpmailer) {
-    $api_endpoint = 'https://CWCLOUD_ENDPOINT_URL';
+    $api_endpoint = 'https://CWCLOUD_ENDPOINT_URL/v1/email';
 
     $data = array(
         'from' => $phpmailer->From,
