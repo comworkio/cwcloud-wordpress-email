@@ -9,7 +9,7 @@
  */
 
 function custom_email_send($phpmailer) {
-    $api_endpoint = 'CWCLOUD_ENDPOINT_URL';
+    $api_endpoint = 'https://CWCLOUD_ENDPOINT_URL';
 
     $data = array(
         'from' => $phpmailer->From,
