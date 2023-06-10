@@ -15,5 +15,3 @@ curl -X 'POST' \
   "content": "Content"
 }'
 ```
-
-There is an environment variable `CWCLOUD_API_TOKEN` to set on your wordpress instance.
