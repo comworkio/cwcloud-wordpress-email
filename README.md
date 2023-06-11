@@ -1,17 +1,5 @@
 # cwcloud-wordpress-email
 
-This is a wordpress extension for using the [cwcloud](https://cloud.comwork.io) email API:
+This is a wordpress extension for using the [cwcloud](https://doc.cloud.comwork.io/docs/tutorials/emailapi) email API.
 
-```shell
-curl -X 'POST' \
-  'https://cloud-api.comwork.io/v1/email' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "from": "cloud@provider.com",
-  "to": "recipient@provider.com",
-  "bcc": "bcc@provider.com",
-  "subject": "Subject",
-  "content": "Content"
-}'
-```
+Go see this documentation to get more details: https://doc.cloud.comwork.io/docs/tutorials/emailapi
